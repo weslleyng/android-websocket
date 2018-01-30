@@ -3,5 +3,6 @@
 <item  android:title="Close"
     android:id="@+id/menu_close"/>
     <item android:title="Retart" android:id="@+id/menu_restart"/>
+    <item android:title="New Chat" android:id="@+id/menu_newchat"/>
 
 </menu>

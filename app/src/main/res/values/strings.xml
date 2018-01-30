@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AppSocket</string>
+    <string name="url_server">ws://192.168.1.31:8080/socket/websocket</string>
 </resources>

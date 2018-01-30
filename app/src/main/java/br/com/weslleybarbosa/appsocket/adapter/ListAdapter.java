@@ -10,21 +10,29 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
+import br.com.weslleybarbosa.appsocket.model.Chat;
+
 /**
  * Criado por Weslley Barbosa em 21/01/2018.
  */
 
 public class ListAdapter extends BaseAdapter {
 
-    private List<String> lista;
+    private List<Chat> lista;
 
+    public ListAdapter(List<Chat> lista, ChatListtener listener) {
+        this.lista = lista;
+        this.listener = listener;
+    }
+
+    private ChatListtener listener;
     @Override
     public int getCount() {
         return lista.size();
     }
 
     @Override
-    public String getItem(int i) {
+    public Chat getItem(int i) {
         return lista.get(i);
     }
 
@@ -37,19 +45,30 @@ public class ListAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
 
         view = LayoutInflater.from(viewGroup.getContext()).inflate(android.R.layout.simple_list_item_1,viewGroup,false).findViewById(android.R.id.text1);
-        ((TextView) view).setText(getItem(i));
+        ((TextView) view).setText(getItem(i).getName());
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onChatClick(getItem(i));
+            }
+        });
         return view;
     }
 
-    public List<String> getLista() {
+    public List<Chat> getLista() {
         return lista;
     }
 
-    public void setLista(List<String> lista) {
+    public void setLista(List<Chat> lista) {
         this.lista = lista;
     }
 
-    public ListAdapter(List<String> lista) {
+    public ListAdapter(List<Chat> lista) {
         this.lista = lista;
+    }
+
+    public interface ChatListtener{
+        void onChatClick(Chat chat);
     }
 }
